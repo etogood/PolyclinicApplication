@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PolyclinicApplication.Data.Models
 {
-    internal class Passport
+    public class Passport
     {
         public int PassportId { get; set; }
 

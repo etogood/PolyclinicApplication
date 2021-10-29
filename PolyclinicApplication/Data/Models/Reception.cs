@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PolyclinicApplication.Data.Models
 {
-    internal class Reception
+    public class Reception
     {
         public int ReceptionId { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace PolyclinicApplication.Data.Models
 {
-    internal class Specialization
+    public class Specialization
     {
         [Key]
         [Required]

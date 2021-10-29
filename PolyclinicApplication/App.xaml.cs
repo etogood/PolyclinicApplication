@@ -20,7 +20,8 @@ namespace PolyclinicApplication
             return Host.CreateDefaultBuilder()
                 .AddConfiguration()
                 .AddViewModel()
-                .AddViews();
+                .AddViews()
+                .AddServices();
         }
 
         public App()

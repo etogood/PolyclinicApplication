@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PolyclinicApplication.Data.Models
 {
-    internal class Schedule
+    public class Schedule
     {
         [Key]
         public int ScheduleId { get; set; }

@@ -2,7 +2,7 @@
 
 namespace PolyclinicApplication.Data.Models
 {
-    internal class User
+    public class User
     {
         public int UserId { get; set; }
 

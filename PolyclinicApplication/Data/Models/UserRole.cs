@@ -2,7 +2,7 @@
 
 namespace PolyclinicApplication.Data.Models
 {
-    internal class UserRole
+    public class UserRole
     {
         [Key]
         public int UserRoleId { get; set; }

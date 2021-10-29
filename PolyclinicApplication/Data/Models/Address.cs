@@ -2,7 +2,7 @@
 
 namespace PolyclinicApplication.Data.Models
 {
-    internal class Address
+    public class Address
     {
         [Key]
         public int AddressId { get; set; }
