@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PolyclinicApplication.Data.Models;
 using PolyclinicApplication.Services;
+using PolyclinicApplication.Services.Interfaces;
 
 namespace PolyclinicApplication.HostBuilders
 {
@@ -10,7 +12,7 @@ namespace PolyclinicApplication.HostBuilders
         {
             return host.ConfigureServices(services =>
             {
-                services.AddSingleton<UserService>();
+                services.AddSingleton<IDataService<User>, UserService>();
             });
         }
     }
