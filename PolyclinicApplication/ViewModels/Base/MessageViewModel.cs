@@ -35,6 +35,6 @@ namespace PolyclinicApplication.ViewModels.Base
 
         }
 
-        private bool HasMessage => !string.IsNullOrEmpty(_message);
+        public bool HasMessage => !string.IsNullOrEmpty(_message);
     }
 }

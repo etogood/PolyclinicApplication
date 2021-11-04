@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using PolyclinicApplication.Commands.Base;
 using PolyclinicApplication.Exception;
+using PolyclinicApplication.Services;
 using PolyclinicApplication.Stores;
 using PolyclinicApplication.ViewModels;
 
@@ -15,11 +16,13 @@ namespace PolyclinicApplication.Commands
     {
         private readonly Authenticator _authenticator;
         private readonly AuthorizationViewModel _authorizationViewModel;
+        private readonly WindowService _windowService;
 
         public LoginCommand(AuthorizationViewModel authorizationViewModel)
         {
             _authenticator = new Authenticator();
             _authorizationViewModel = authorizationViewModel;
+            _windowService = new WindowService();
         }
 
         public override bool CanExecute(object parameter) => !_authorizationViewModel.HasErrors
@@ -36,6 +39,8 @@ namespace PolyclinicApplication.Commands
             try
             {
                 _authenticator.Login(username, password);
+                _windowService.ShowWindow(new MainViewModel());
+                _windowService.CloseWindow(_authorizationViewModel);
             }
             catch (InvalidPasswordException)
             {

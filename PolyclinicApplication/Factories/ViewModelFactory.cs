@@ -20,6 +20,8 @@ namespace PolyclinicApplication.Factories
             {
                 case ViewType.Authorization:
                     return new AuthorizationViewModel(_navigationStore);
+                case ViewType.Main:
+                    return new MainViewModel(_navigationStore);
 
                 default:
                     throw new CreateViewModelException();

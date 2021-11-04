@@ -30,12 +30,14 @@ namespace PolyclinicApplication.Services
             if (enteredUser == null)
                 throw new UserNotFoundException(login);
             
-            var passwordVerificationResult =
+/*            var passwordVerificationResult =
                 _passwordHasher.VerifyHashedPassword(enteredUser.Password, password);
 
             if (passwordVerificationResult != PasswordVerificationResult.Success)
                 throw new InvalidPasswordException();
-
+*/
+            if (password != enteredUser.Password) 
+                throw new InvalidPasswordException();
             return enteredUser;
         }
 

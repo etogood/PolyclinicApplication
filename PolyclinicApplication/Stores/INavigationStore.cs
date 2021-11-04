@@ -9,7 +9,8 @@ namespace PolyclinicApplication.Stores
 {
     public enum ViewType
     {
-        Authorization
+        Authorization,
+        Main
     }
 
     internal interface INavigationStore

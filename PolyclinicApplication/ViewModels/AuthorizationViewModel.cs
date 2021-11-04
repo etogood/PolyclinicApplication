@@ -14,7 +14,7 @@ namespace PolyclinicApplication.ViewModels
     {
         private readonly INavigationStore _navigationStore;
         private readonly ErrorViewModel _errorViewModel;
-        public readonly MessageViewModel MessageViewModel;
+        public MessageViewModel MessageViewModel { get; }
         public LoginCommand LoginCommand { get; }
 
         public AuthorizationViewModel()

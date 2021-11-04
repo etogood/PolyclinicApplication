@@ -10,7 +10,9 @@
         xmlns:vm="clr-namespace:PolyclinicApplication.ViewModels"
         xmlns:components="clr-namespace:PolyclinicApplication.Views.Components"
         mc:Ignorable="d"
-        Title="Авторизация" Height="300" Width="500" ResizeMode="NoResize">
+        Title="Авторизация" 
+        Height="300" Width="500" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:AuthorizationViewModel/>
     </Window.DataContext>
@@ -19,18 +21,20 @@
                HorizontalAlignment="Center"
                FontSize="30" Margin="20"/>
         <TextBlock HorizontalAlignment="Center" 
+                   Foreground="DarkRed"
                    DataContext="{Binding MessageViewModel}"
-                   Text="{Binding Message}"/>
+                   Text="{Binding Message}"
+                   Visibility="{Binding HasMessage,UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox HorizontalAlignment="Center" 
                  Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
-                 Width="250" Height="25" Margin="10"/>
+                 Width="250" Height="25" Margin="10" Tag="Логин" Style="{StaticResource placeHolder}"/>
         <TextBox HorizontalAlignment="Center" 
                  Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
-                 Width="250" Height="25" Margin="10"/>
+                 Width="250" Height="25" Margin="10" Style="{StaticResource placeHolder}" Tag="Пароль" Cursor="IBeam"/>
         <StackPanel Orientation="Horizontal">
-            <Button Margin="70 20 0 0" HorizontalAlignment="Center"
+            <Button Margin="70 10 0 0" HorizontalAlignment="Center"
                     Width="150" Height="40" Content="Войти" Command="{Binding LoginCommand}" Cursor="Hand"/>
-            <Button Margin="70 20 0 0" HorizontalAlignment="Center"
+            <Button Margin="70 10 0 0" HorizontalAlignment="Center"
                     Width="150" Height="40" Content="Регистрация" 
                     Style="{StaticResource MaterialDesignFlatButton}"/>
         </StackPanel>

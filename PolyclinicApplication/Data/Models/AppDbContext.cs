@@ -26,6 +26,12 @@ namespace PolyclinicApplication.Data.Models
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(
+                @"Server=(localdb)\MSSQLLocalDB;Database=PolyclinicDB;Trusted_Connection=True;");
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CS_AS");
