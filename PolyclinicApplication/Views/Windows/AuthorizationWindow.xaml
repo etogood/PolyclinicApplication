@@ -5,19 +5,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PolyclinicApplication.Views.Windows"
+        xmlns:command="clr-namespace:PolyclinicApplication.Commands"
+        xmlns:viewtype="clr-namespace:PolyclinicApplication.Stores"
+        xmlns:vm="clr-namespace:PolyclinicApplication.ViewModels"
+        xmlns:components="clr-namespace:PolyclinicApplication.Views.Components"
         mc:Ignorable="d"
         Title="Авторизация" Height="300" Width="500" ResizeMode="NoResize">
+    <Window.DataContext>
+        <vm:AuthorizationViewModel/>
+    </Window.DataContext>
     <StackPanel>
         <Label Content="Вход" FontWeight="Bold"
                HorizontalAlignment="Center"
                FontSize="30" Margin="20"/>
-        <TextBox HorizontalAlignment="Center"
+        <TextBlock HorizontalAlignment="Center" 
+                   DataContext="{Binding MessageViewModel}"
+                   Text="{Binding Message}"/>
+        <TextBox HorizontalAlignment="Center" 
+                 Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                  Width="250" Height="25" Margin="10"/>
-        <TextBox HorizontalAlignment="Center"
+        <TextBox HorizontalAlignment="Center" 
+                 Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                  Width="250" Height="25" Margin="10"/>
         <StackPanel Orientation="Horizontal">
             <Button Margin="70 20 0 0" HorizontalAlignment="Center"
-                    Width="150" Height="40" Content="Войти"/>
+                    Width="150" Height="40" Content="Войти" Command="{Binding LoginCommand}" Cursor="Hand"/>
             <Button Margin="70 20 0 0" HorizontalAlignment="Center"
                     Width="150" Height="40" Content="Регистрация" 
                     Style="{StaticResource MaterialDesignFlatButton}"/>

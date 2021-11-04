@@ -14,6 +14,12 @@ namespace PolyclinicApplication.Services
     class UserService : IDataService<User>, IDisposable
     {
         private readonly AppDbContext _db;
+
+        public UserService()
+        {
+            _db = new AppDbContext();
+        }
+
         public async Task Create(User user)
         {
             await _db.Users.AddAsync(user);
@@ -30,16 +36,13 @@ namespace PolyclinicApplication.Services
         {
             user.Login = updatedUser.Login;
             user.Password = updatedUser.Password;
-            user.UserRoleId = updatedUser.UserRoleId;
             await _db.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<User>> GetAll() => await _db.Users.ToListAsync();
         
-
         public User? GetByLogin(string login) =>_db.Users.FirstOrDefault(x => x.Login == login);
         
-
         public void Dispose() => _db.Dispose();
     }
 }

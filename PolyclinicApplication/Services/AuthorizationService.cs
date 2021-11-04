@@ -12,10 +12,17 @@ using PolyclinicApplication.Services.Interfaces;
 
 namespace PolyclinicApplication.Services
 {
-    class AuhorizationService : IAuthorizationService
+    class AuthorizationService : IAuthorizationService
     {
         private readonly UserService _userService;
         private readonly IPasswordHasher _passwordHasher;
+
+        public AuthorizationService()
+        {
+            _userService = new UserService();
+            _passwordHasher = new PasswordHasher();
+        }
+
         public User Login(string login, string password)
         {
             var enteredUser = _userService.GetByLogin(login);

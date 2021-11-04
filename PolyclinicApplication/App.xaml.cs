@@ -22,6 +22,8 @@ namespace PolyclinicApplication
                 .AddViewModel()
                 .AddViews()
                 .AddServices()
+                .AddStores()
+                .AddFactories()
                 .AddDbContext();
         }
 

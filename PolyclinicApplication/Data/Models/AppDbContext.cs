@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace PolyclinicApplication.Data.Models
 {
@@ -16,9 +17,12 @@ namespace PolyclinicApplication.Data.Models
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        public AppDbContext()
         {
         }
 

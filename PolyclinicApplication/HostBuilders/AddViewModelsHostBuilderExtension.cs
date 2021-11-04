@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PolyclinicApplication.ViewModels;
+using PolyclinicApplication.ViewModels.Base;
 
 namespace PolyclinicApplication.HostBuilders
 {
@@ -11,6 +12,7 @@ namespace PolyclinicApplication.HostBuilders
             return host.ConfigureServices(service =>
             {
                 service.AddSingleton<AuthorizationViewModel>();
+                service.AddSingleton<ErrorViewModel>();
             });
         }
     }
