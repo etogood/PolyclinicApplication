@@ -24,19 +24,14 @@
                    Foreground="DarkRed"
                    DataContext="{Binding MessageViewModel}"
                    Text="{Binding Message}"
-                   Visibility="{Binding HasMessage,UpdateSourceTrigger=PropertyChanged}"/>
+                   Visibility="{Binding HasMessage, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox HorizontalAlignment="Center" 
                  Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                  Width="250" Height="25" Margin="10" Tag="Логин" Style="{StaticResource placeHolder}"/>
         <TextBox HorizontalAlignment="Center" 
                  Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
-                 Width="250" Height="25" Margin="10" Style="{StaticResource placeHolder}" Tag="Пароль" Cursor="IBeam"/>
-        <StackPanel Orientation="Horizontal">
-            <Button Margin="70 10 0 0" HorizontalAlignment="Center"
-                    Width="150" Height="40" Content="Войти" Command="{Binding LoginCommand}" Cursor="Hand"/>
-            <Button Margin="70 10 0 0" HorizontalAlignment="Center"
-                    Width="150" Height="40" Content="Регистрация" 
-                    Style="{StaticResource MaterialDesignFlatButton}"/>
-        </StackPanel>
+                 Width="250" Height="25" Margin="10" Style="{StaticResource placeHolder}" Tag="Пароль" />
+        <Button Margin="0 15 0 0" HorizontalAlignment="Center"
+                Width="150" Height="40" Content="Войти" Command="{Binding LoginCommand}" />
     </StackPanel>
 </Window>

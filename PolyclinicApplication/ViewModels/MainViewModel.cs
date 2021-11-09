@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PolyclinicApplication.Stores;
+﻿using PolyclinicApplication.Stores;
 using PolyclinicApplication.ViewModels.Base;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using PolyclinicApplication.Commands;
 
 namespace PolyclinicApplication.ViewModels
 {
-    class MainViewModel : ViewModel
+    internal class MainViewModel : ViewModel
     {
         private readonly INavigationStore _navigationStore;
         private readonly ErrorViewModel _errorViewModel;
 
+        public AddNewPatientCommand AddNewPatientCommand { get; }
         public MessageViewModel MessageViewModel { get; }
 
         public MainViewModel(NavigationStore navigationStore)
@@ -24,6 +26,7 @@ namespace PolyclinicApplication.ViewModels
         {
             _errorViewModel = new ErrorViewModel();
             MessageViewModel = new MessageViewModel();
+            AddNewPatientCommand = new AddNewPatientCommand(this);
         }
 
         #region Properties
@@ -36,11 +39,10 @@ namespace PolyclinicApplication.ViewModels
             set
             {
                 if (!Set(ref _firstName, value)) return;
-                    _errorViewModel.ClearErrors(nameof(FirstName));
-                if(string.IsNullOrEmpty(FirstName))
+                _errorViewModel.ClearErrors(nameof(FirstName));
+                if (string.IsNullOrEmpty(FirstName))
                     _errorViewModel.AddError(nameof(FirstName), "Заполните данное поле");
             }
-
         }
 
         private string _surname;
@@ -55,7 +57,6 @@ namespace PolyclinicApplication.ViewModels
                 if (string.IsNullOrEmpty(Surname))
                     _errorViewModel.AddError(nameof(Surname), "Заполните данное поле");
             }
-
         }
 
         private string _patronymic;
@@ -81,10 +82,7 @@ namespace PolyclinicApplication.ViewModels
             {
                 if (!Set(ref _dateOfBirth, value)) return;
                 _errorViewModel.ClearErrors(nameof(DateOfBirth));
-                if (string.IsNullOrEmpty(DateOfBirth.ToShortDateString()))
-                    _errorViewModel.AddError(nameof(DateOfBirth), "Введите дату рождения");
             }
-
         }
 
         #region Address
@@ -143,21 +141,61 @@ namespace PolyclinicApplication.ViewModels
             }
         }
 
-        #endregion
+        #endregion Address
 
         #region Documents
 
-        private string _passport;
+        private string _passportNumber;
 
-        public string Passport
+        public string PassportNumber
         {
-            get => _passport;
+            get => _passportNumber;
             set
             {
-                if (!Set(ref _passport, value)) return;
-                _errorViewModel.ClearErrors(nameof(Passport));
-                if (string.IsNullOrEmpty(Passport))
-                    _errorViewModel.AddError(nameof(Passport), "Заполните данное поле");
+                if (!Set(ref _passportNumber, value)) return;
+                _errorViewModel.ClearErrors(nameof(PassportNumber));
+                if (string.IsNullOrEmpty(PassportNumber))
+                    _errorViewModel.AddError(nameof(PassportNumber), "Заполните данное поле");
+            }
+        }
+
+        private DateTime _passportDate;
+
+        public DateTime PassportDate
+        {
+            get => _passportDate;
+            set
+            {
+                if (!Set(ref _passportDate, value)) return;
+                _errorViewModel.ClearErrors(nameof(PassportDate));
+            }
+        }
+
+        private string _passportWhoGave;
+
+        public string PassportWhoGave
+        {
+            get => _passportWhoGave;
+            set
+            {
+                if (!Set(ref _passportWhoGave, value)) return;
+                _errorViewModel.ClearErrors(nameof(PassportWhoGave));
+                if (string.IsNullOrEmpty(PassportWhoGave))
+                    _errorViewModel.AddError(nameof(PassportWhoGave), "Заполните данное поле");
+            }
+        }
+
+        private string _passportCode;
+
+        public string PassportCode
+        {
+            get => _passportCode;
+            set
+            {
+                if (!Set(ref _passportCode, value)) return;
+                _errorViewModel.ClearErrors(nameof(PassportCode));
+                if (string.IsNullOrEmpty(PassportCode))
+                    _errorViewModel.AddError(nameof(PassportCode), "Заполните данное поле");
             }
         }
 
@@ -198,8 +236,6 @@ namespace PolyclinicApplication.ViewModels
             {
                 if (!Set(ref _dateOfIssue, value)) return;
                 _errorViewModel.ClearErrors(nameof(DateOfIssue));
-                if (string.IsNullOrEmpty(DateOfIssue.ToShortDateString()))
-                    _errorViewModel.AddError(nameof(DateOfIssue), "Заполните данное поле");
             }
         }
 
@@ -217,8 +253,41 @@ namespace PolyclinicApplication.ViewModels
             }
         }
 
-        #endregion
+        #endregion Documents
 
-        #endregion
+        #endregion Properties
+
+        public void ErrorsViewModelErrorsChanged(object sender, DataErrorsChangedEventArgs e) =>
+            ErrorsChanged?.Invoke(this, e);
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        public bool HasErrors => _errorViewModel.HasErrors;
+
+        public string ErrorMessage
+        {
+            set => MessageViewModel.Message = value;
+        }
+
+        public IEnumerable GetErrors(string propertyName) => _errorViewModel.GetErrors(propertyName);
+
+        public bool CanExecute()
+        {
+            return string.IsNullOrEmpty(_city)
+                   && string.IsNullOrEmpty(_firstName)
+                   && string.IsNullOrEmpty(_house)
+                   && string.IsNullOrEmpty(_insuranceCompanyName)
+                   && string.IsNullOrEmpty(_insuranceIndividualPersonalAccountNumber)
+                   && string.IsNullOrEmpty(_medicalInsuranceNumber)
+                   && string.IsNullOrEmpty(_passportCode)
+                   && string.IsNullOrEmpty(_passportNumber)
+                   && string.IsNullOrEmpty(_passportWhoGave)
+                   && string.IsNullOrEmpty(_street)
+                   && string.IsNullOrEmpty(_patronymic)
+                   && string.IsNullOrEmpty(_surname)
+                   && string.IsNullOrEmpty(_dateOfBirth.ToShortDateString())
+                   && string.IsNullOrEmpty(_dateOfIssue.ToShortDateString())
+                   && string.IsNullOrEmpty(_passportDate.ToShortDateString());
+        }
     }
 }
